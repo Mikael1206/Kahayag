@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:routes": "node scripts/test-routes.js"
+    "test:routes": "node scripts/test-routes.js",
+    "test:ui:routes": "node scripts/test-ui-routes.js"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

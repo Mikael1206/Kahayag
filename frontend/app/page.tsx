@@ -1,4 +1,4 @@
-import NightMapShell from "./components/NightMapShell";
+import MapExperience from "./components/MapExperience";
 
 const DISCLAIMER =
   "Notice: Kahayag route recommendations prioritize street lighting and visibility to improve nighttime safety, but cannot guarantee complete absence of crime or road hazards. Always remain vigilant of your surroundings.";
@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="relative h-dvh w-full overflow-hidden bg-[#0F172A] text-[#E2E8F0]">
       <div className="absolute inset-0" aria-label="Night street map">
-        <NightMapShell />
+        <MapExperience />
       </div>
       <p
         role="note"

@@ -1,12 +1,21 @@
 "use client";
 
+import type { RouteOption } from "@/lib/calculateRoute";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import RouteLayers from "./RouteLayers";
 
-/** U-Belt corridor used in docs/qa-test-plan.md TC-001. */
 export const DEFAULT_CENTER: [number, number] = [14.5862, 121.0565];
 
-export default function NightMap() {
+export default function NightMap({
+  wellLit,
+  direct,
+  active,
+}: {
+  wellLit: RouteOption | null;
+  direct: RouteOption | null;
+  active: "wellLit" | "direct" | null;
+}) {
   return (
     <MapContainer
       center={DEFAULT_CENTER}
@@ -18,6 +27,7 @@ export default function NightMap() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <RouteLayers wellLit={wellLit} direct={direct} active={active} />
     </MapContainer>
   );
 }
