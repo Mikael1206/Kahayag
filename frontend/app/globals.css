@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.leaflet-container {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background: #0f172a;
+  font-family: inherit;
+  touch-action: pan-x pan-y;
+}
+
+/* Night look without a paid/dark-tile API key (Carto now requires one). */
+.leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9);
+}

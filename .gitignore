@@ -1,0 +1,38 @@
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+service-account*.json
+
+# Dependencies and build output
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+.vercel/
+.turbo/
+
+# OS and editor
+.DS_Store
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# FMD-Advanced framework (local only — do not publish)
+HOW_TO_USE_FMD.md
+AGENT_ROUTING.md
+AGENTS.md
+Playbook.md
+.cursor/
+handoff/TASK-000-template.md
+
+# Planning suite (local only)
+docs/
+seed/
+work/
