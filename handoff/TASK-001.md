@@ -92,6 +92,6 @@ below — a claimed pass with no evidence does not count.*
 ## Status
 
 - **State:** in progress
-- **Blocked reason (if any):** Waiting on founder click-through of **Load map** and tile pan at `http://localhost:3000`. `npm run build` already passed. No browser automation in this environment.
-- **Verify result:** `cd frontend && npm run build` exited 0 (Next.js 14.2.35). Routes: `/` static. Lockfile SWC patch warned (`Cannot read properties of undefined (reading 'os')`) but did not fail the build. `curl http://127.0.0.1:3000` returned the disclaimer and a real **Load map** button. Did not click the button or pan tiles.
+- **Blocked reason (if any):** Waiting on founder confirmation that **Load map** shows Carto dark tiles (no API-key banner).
+- **Verify result:** `cd frontend && npm run build` exited 0 on 2026-09-25 after moving `favicon.ico` to `public/` and adding `app/not-found.tsx`. Routes: `/`, `/_not-found`. Lockfile SWC patch still warns (fetch timeout) but does not fail the build. `.env.local` is loaded. Click-through of Load map / tile pan was not re-run in this session.
 - **Delivery Gate:** not yet (verification click-through open)
