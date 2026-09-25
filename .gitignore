@@ -9,6 +9,9 @@ service-account*.json
 
 # Dependencies and build output
 node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
 .next/
 out/
 dist/
@@ -20,6 +23,7 @@ coverage/
 # OS and editor
 .DS_Store
 *.tsbuildinfo
+next-env.d.ts
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

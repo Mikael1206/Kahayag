@@ -1,6 +1,6 @@
 # TASK-001: Next.js scaffold + base Leaflet map
 
-> Packet for PH-01 setup. App lives in `frontend/`. API work belongs in `backend/`.
+> Packet for PH-01 setup. The Next.js app lives in `frontend/`. API work belongs in `backend/`.
 
 ## Reference
 
@@ -24,9 +24,9 @@ Initialize a Next.js App Router TypeScript app in `frontend/` with Tailwind CSS,
 
 - `handoff/TASK-001.md`
 - `docs/implementation-plan.md` (status / run log only)
-- `frontend/` (Next.js app, lockfile)
+- `frontend/` (Next.js app, lockfile; no local README or .gitignore — those live at repo root)
 - `backend/` (folder only; no API in this packet)
-- **Do not touch:** `seed/`, `work/`, other `docs/` product files, root `README.md`, or another task's write scope.
+- **Do not touch:** `seed/`, `work/`, other `docs/` product files, or another task's write scope.
 
 ## Spec (state this BEFORE writing code — signature, data shape, edge cases)
 

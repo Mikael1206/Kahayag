@@ -3,8 +3,8 @@
 Night navigation and street-lighting safety for Philippine pedestrians.
 
 ```
-frontend/   commuter and civic web app (Next.js)
-backend/    API and data services (not started)
+frontend/   Next.js app
+backend/    API and data services (empty)
 ```
 
 ```
