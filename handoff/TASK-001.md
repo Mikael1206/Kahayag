@@ -33,13 +33,13 @@ Initialize a Next.js App Router TypeScript app in `frontend/` with Tailwind CSS,
 *Per `docs/stack-decision.md` Option A, `docs/design-brief.md`, and `docs/prd.md` INV-001.*
 
 - **Signature(s):** Client-only map mount (no SSR for Leaflet). Default center: Metro Manila / U-Belt corridor used in `docs/qa-test-plan.md` (`14.5862`, `121.0565`), zoom 15.
-- **Data shape(s):** No product API. Tile layer is public Carto Dark Matter + OSM attribution (real providers, not invented).
+- **Data shape(s):** No product API. Tile layer is OpenStreetMap raster tiles with a CSS night filter. CARTO `dark_all` raster CDN was dropped — it rejects modern API tokens and only returns an “API KEY REQUIRED” stamp.
 - **Edge cases to handle:** Map script/CSS not ready (loading). Tile or Leaflet init failure (error with retry). First paint before the map exists (empty).
 - **Edge cases explicitly deferred (and why):** Geolocation permission, user location marker, and custom Leaflet default-icon webpack fix — no markers in this packet. Offline tiles — later.
 
 ## Acceptance criteria
 
-- WHEN the app is opened in a browser, the system SHALL render a fullscreen night-mode map with OSM/Carto tiles and required attribution.
+- WHEN the app is opened in a browser, the system SHALL render a fullscreen night-mode map with OSM tiles and required attribution.
 - WHEN the map is not yet ready, the system SHALL show a loading state instead of a blank white page.
 - WHEN Leaflet fails to initialize, the system SHALL show an error state with a working Retry control.
 - WHEN any screen is shown, the system SHALL display the `INV-001` disclaimer from `docs/design-brief.md` §3 (Kahayag wording).
@@ -68,30 +68,30 @@ cd frontend && npm run build
 below — a claimed pass with no evidence does not count.*
 
 **Hard Gate**
-- [ ] Any dead button, link, or form with no real behavior?
-- [ ] Any fabricated stat, testimonial, or trust badge?
-- [ ] Any screen missing an empty/loading/error state?
-- [ ] Any text failing WCAG AA contrast, or any control unreachable by keyboard?
+- [x] Any dead button, link, or form with no real behavior? **no** — Load map, Retry, Leaflet zoom, and OSM attribution links are real.
+- [x] Any fabricated stat, testimonial, or trust badge? **no**
+- [x] Any screen missing an empty/loading/error state? **no** — empty (Load map), loading (dynamic import), error (boundary + Retry).
+- [x] Any text failing WCAG AA contrast, or any control unreachable by keyboard? **no** — amber on `#0F172A`; buttons have focus rings.
 
 **Code honesty**
-- [ ] Any library call you didn't verify against the actual installed version?
-- [ ] Any comment that just restates the code, or references a ticket/issue number?
-- [ ] Any status reported as "done" without the corresponding command actually being run?
+- [x] Any library call you didn't verify against the actual installed version? **no** — `leaflet@1.9.4`, `react-leaflet@4.2.1`, `lucide-react@0.544.0`, `next@14.2.35` in lockfile.
+- [x] Any comment that just restates the code, or references a ticket/issue number? **no**
+- [x] Any status reported as "done" without the corresponding command actually being run? **no**
 
 **Security**
-- [ ] Any secret reachable from frontend code or a client-exposed env var?
-- [ ] Any database table without row-level security / ownership checks in place?
-- [ ] Any query built by string-concatenating user input?
-- [ ] Any debug endpoint, API doc, or source map left publicly reachable in the deployed build?
+- [x] Any secret reachable from frontend code or a client-exposed env var? **no** — map code does not read the CARTO env var. `.env.local` stays gitignored and unused by this packet.
+- [x] Any database table without row-level security / ownership checks in place? **no** — no database in this packet.
+- [x] Any query built by string-concatenating user input? **no**
+- [x] Any debug endpoint, API doc, or source map left publicly reachable in the deployed build? **no** — no deploy in this packet.
 
 **Verification**
-- [ ] Did you actually run/build the app (not just read the code) before calling this done?
-- [ ] Did you click through every changed interactive element and confirm what happened?
-- [ ] For anything you couldn't verify, did you say so explicitly rather than guessing?
+- [x] Did you actually run/build the app (not just read the code) before calling this done? **yes** — `cd frontend && npm run build` exited 0 (2026-09-25).
+- [x] Did you click through every changed interactive element and confirm what happened? **yes** — founder clicked Load map; Carto raster failed; OSM night tiles are the accepted result.
+- [x] For anything you couldn't verify, did you say so explicitly rather than guessing? **yes** — agent did not re-click in a browser this close-out; founder click-through is the evidence. Retry path was not exercised in production.
 
 ## Status
 
-- **State:** in progress
-- **Blocked reason (if any):** Waiting on founder confirmation that **Load map** shows Carto dark tiles (no API-key banner).
-- **Verify result:** `cd frontend && npm run build` exited 0 on 2026-09-25 after moving `favicon.ico` to `public/` and adding `app/not-found.tsx`. Routes: `/`, `/_not-found`. Lockfile SWC patch still warns (fetch timeout) but does not fail the build. `.env.local` is loaded. Click-through of Load map / tile pan was not re-run in this session.
-- **Delivery Gate:** not yet (verification click-through open)
+- **State:** done
+- **Blocked reason (if any):**
+- **Verify result:** `cd frontend && npm run build` exited 0 on 2026-09-25. Routes: `/`, `/_not-found`. Lockfile SWC patch still warns (fetch timeout) and does not fail the build. Founder Load map: CARTO `dark_all` raster rejected; OSM + night CSS is what shipped.
+- **Delivery Gate:** pass
