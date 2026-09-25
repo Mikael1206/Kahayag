@@ -20,7 +20,7 @@ body {
   touch-action: pan-x pan-y;
 }
 
-/* Night look without a paid/dark-tile API key (Carto now requires one). */
-.leaflet-tile-pane {
+/* OSM fallback only. Carto dark_all is already a night style. */
+.leaflet-osm-fallback .leaflet-tile-pane {
   filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9);
 }
