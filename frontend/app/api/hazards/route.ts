@@ -3,6 +3,7 @@ import {
   createHazard,
   findNearbyHazard,
   isHazardCategory,
+  listHazardsInBbox,
 } from "@/lib/hazards";
 import { isValidLatLng, type LatLng } from "@/lib/calculateRoute";
 import { NextResponse } from "next/server";
@@ -16,6 +17,32 @@ function parsePoint(lat: unknown, lng: unknown): LatLng | null {
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
+  const west = url.searchParams.get("west");
+  if (west !== null) {
+    const box = {
+      west: Number(west),
+      south: Number(url.searchParams.get("south")),
+      east: Number(url.searchParams.get("east")),
+      north: Number(url.searchParams.get("north")),
+    };
+    try {
+      const pins = await listHazardsInBbox(box);
+      return NextResponse.json({ pins });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "UNKNOWN";
+      if (message === "INVALID_BBOX") {
+        return NextResponse.json(
+          { error: "west, south, east, and north must form a box no larger than 2 degrees." },
+          { status: 400 }
+        );
+      }
+      if (message === "DATABASE_URL_MISSING") {
+        return NextResponse.json({ error: "Server database is not configured." }, { status: 500 });
+      }
+      return NextResponse.json({ error: "Could not load reports on the map." }, { status: 500 });
+    }
+  }
+
   const point = parsePoint(url.searchParams.get("lat"), url.searchParams.get("lng"));
   const category = url.searchParams.get("category") ?? "";
   if (!point || !isHazardCategory(category)) {

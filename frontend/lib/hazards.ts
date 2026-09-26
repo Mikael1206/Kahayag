@@ -49,6 +49,48 @@ function rowToPin(row: {
   };
 }
 
+export async function listHazardsInBbox(box: {
+  west: number;
+  south: number;
+  east: number;
+  north: number;
+}): Promise<HazardPin[]> {
+  const { west, south, east, north } = box;
+  if (
+    ![west, south, east, north].every(Number.isFinite) ||
+    south >= north ||
+    west >= east ||
+    east - west > 2 ||
+    north - south > 2
+  ) {
+    throw new Error("INVALID_BBOX");
+  }
+  const client = dbClient();
+  await client.connect();
+  try {
+    const result = await client.query<{
+      id: string;
+      latitude: number;
+      longitude: number;
+      category: HazardCategory;
+      status: string;
+      confirm_count: number;
+      created_at: Date;
+    }>(
+      `select id, latitude, longitude, category, status, confirm_count, created_at
+         from public.hazard_reports
+        where status <> 'resolved'
+          and geom && st_makeenvelope($1, $2, $3, $4, 4326)
+        order by created_at desc
+        limit 200`,
+      [west, south, east, north]
+    );
+    return result.rows.map(rowToPin);
+  } finally {
+    await client.end();
+  }
+}
+
 export async function findNearbyHazard(
   point: LatLng,
   category: HazardCategory
