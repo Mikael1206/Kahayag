@@ -10,7 +10,8 @@
     "test:routes": "node scripts/test-routes.js",
     "test:ui:routes": "node scripts/test-ui-routes.js",
     "test:hazards": "node scripts/test-hazards.js",
-    "test:map": "node scripts/test-map.js"
+    "test:map": "node scripts/test-map.js",
+    "test:sos": "node scripts/test-sos.js"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

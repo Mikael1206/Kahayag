@@ -8,6 +8,7 @@ import { useMemo, useState } from "react";
 import HazardReporter from "./HazardReporter";
 import MapErrorBoundary from "./MapErrorBoundary";
 import RouteComparisonCard from "./RouteComparisonCard";
+import SosControl from "./SosControl";
 
 const NightMap = dynamic(() => import("./NightMap"), {
   ssr: false,
@@ -124,6 +125,8 @@ export default function MapExperience() {
           </div>
         )}
       </div>
+
+      <SosControl fallbackOrigin={origin} />
 
       <button
         type="button"

@@ -40,3 +40,18 @@ body {
 .hazard-cluster span {
   pointer-events: none;
 }
+
+@keyframes sos-strobe {
+  0%,
+  49% {
+    background: #ffffff;
+  }
+  50%,
+  100% {
+    background: #f59e0b;
+  }
+}
+
+.sos-strobe {
+  animation: sos-strobe 0.2s linear infinite;
+}
