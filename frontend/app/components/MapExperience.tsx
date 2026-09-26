@@ -1,9 +1,11 @@
 "use client";
 
 import type { CalculateResult, LatLng } from "@/lib/calculateRoute";
+import type { HazardPin } from "@/lib/hazardTypes";
 import { Map } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
+import HazardReporter from "./HazardReporter";
 import MapErrorBoundary from "./MapErrorBoundary";
 import RouteComparisonCard from "./RouteComparisonCard";
 
@@ -49,6 +51,8 @@ export default function MapExperience() {
   const [result, setResult] = useState<CalculateResult | null>(null);
   const [selected, setSelected] = useState<"wellLit" | "direct">("wellLit");
   const [walking, setWalking] = useState(false);
+  const [hazards, setHazards] = useState<HazardPin[]>([]);
+  const [reporting, setReporting] = useState(false);
 
   const active = useMemo(() => {
     if (!walking || !result) return null;
@@ -103,6 +107,7 @@ export default function MapExperience() {
               wellLit={walking ? result?.wellLit ?? null : null}
               direct={walking ? result?.direct ?? null : null}
               active={active}
+              hazards={hazards}
             />
           </MapErrorBoundary>
         ) : (
@@ -119,6 +124,29 @@ export default function MapExperience() {
           </div>
         )}
       </div>
+
+      <button
+        type="button"
+        onClick={() => setReporting(true)}
+        className="absolute right-3 top-20 z-[1100] inline-flex min-h-12 items-center justify-center rounded-md bg-[#F59E0B] px-4 font-medium text-[#0F172A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F59E0B]"
+      >
+        Report dark spot
+      </button>
+
+      {reporting ? (
+        <HazardReporter
+          fallbackOrigin={origin}
+          onClose={() => setReporting(false)}
+          onSaved={(pin) => {
+            setHazards((current) => {
+              const without = current.filter((item) => item.id !== pin.id);
+              return [...without, pin];
+            });
+            setMapReady(true);
+            setReporting(false);
+          }}
+        />
+      ) : null}
 
       <form
         className="absolute bottom-0 left-0 right-0 z-[1100] space-y-2 bg-[#0F172A]/95 px-3 pb-4 pt-2"

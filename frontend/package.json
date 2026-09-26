@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test:routes": "node scripts/test-routes.js",
-    "test:ui:routes": "node scripts/test-ui-routes.js"
+    "test:ui:routes": "node scripts/test-ui-routes.js",
+    "test:hazards": "node scripts/test-hazards.js"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
