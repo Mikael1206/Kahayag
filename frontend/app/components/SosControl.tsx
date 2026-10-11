@@ -163,7 +163,7 @@ export default function SosControl({ fallbackOrigin }: { fallbackOrigin: LatLng 
             clearHoldWatchers();
           }
         }}
-        className="absolute left-3 top-20 z-[1100] inline-flex min-h-12 min-w-12 items-center justify-center rounded-md bg-[#B91C1C] px-4 font-medium text-[#F8FAFC] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F59E0B]"
+        className="absolute left-3 top-36 z-[1100] inline-flex min-h-12 min-w-12 items-center justify-center rounded-md bg-[#B91C1C] px-4 font-medium text-[#F8FAFC] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F59E0B]"
       >
         {holding ? `Hold… ${Math.min(100, Math.round((holdMs / SOS_HOLD_MS) * 100))}%` : "SOS"}
       </button>

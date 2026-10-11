@@ -11,9 +11,11 @@
     "test:ui:routes": "node scripts/test-ui-routes.js",
     "test:hazards": "node scripts/test-hazards.js",
     "test:map": "node scripts/test-map.js",
-    "test:sos": "node scripts/test-sos.js"
+    "test:sos": "node scripts/test-sos.js",
+    "test:portal": "node scripts/test-portal.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.8",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.544.0",
     "next": "14.2.35",

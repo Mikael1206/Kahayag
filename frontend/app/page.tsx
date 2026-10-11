@@ -9,12 +9,20 @@ export default function Home() {
       <div className="absolute inset-0" aria-label="Night street map">
         <MapExperience />
       </div>
-      <p
-        role="note"
-        className="pointer-events-none absolute left-3 right-3 top-3 z-[1000] rounded-md bg-[#1E293B]/95 px-3 py-2 text-sm leading-snug tracking-normal text-[#E2E8F0] shadow-md"
-      >
-        {DISCLAIMER}
-      </p>
+      <div className="absolute left-3 right-3 top-3 z-[1000] space-y-2">
+        <p
+          role="note"
+          className="pointer-events-none rounded-md bg-[#1E293B]/95 px-3 py-2 text-sm leading-snug tracking-normal text-[#E2E8F0] shadow-md"
+        >
+          {DISCLAIMER}
+        </p>
+        <a
+          href="/portal"
+          className="inline-flex min-h-12 items-center rounded-md bg-[#1E293B] px-3 text-sm text-[#E2E8F0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F59E0B]"
+        >
+          Officials portal
+        </a>
+      </div>
     </div>
   );
 }

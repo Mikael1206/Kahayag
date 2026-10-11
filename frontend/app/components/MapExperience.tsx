@@ -131,7 +131,7 @@ export default function MapExperience() {
       <button
         type="button"
         onClick={() => setReporting(true)}
-        className="absolute right-3 top-20 z-[1100] inline-flex min-h-12 items-center justify-center rounded-md bg-[#F59E0B] px-4 font-medium text-[#0F172A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F59E0B]"
+        className="absolute right-3 top-36 z-[1100] inline-flex min-h-12 items-center justify-center rounded-md bg-[#F59E0B] px-4 font-medium text-[#0F172A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F59E0B]"
       >
         Report dark spot
       </button>
